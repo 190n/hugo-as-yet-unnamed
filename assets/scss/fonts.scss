@@ -1,0 +1,6 @@
+{{ $woff2 := resources.Get "fonts/ptserif_r.woff2" | resources.Fingerprint "md5" }}
+
+@font-face {
+	font-family: 'PT Serif';
+	src: url('{{ $woff2.Permalink }}');
+}
