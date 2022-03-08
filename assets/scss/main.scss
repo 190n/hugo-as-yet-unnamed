@@ -1,8 +1,5 @@
 @import 'scss/reset.scss';
-
-$font-body: 'PT Serif', Georgia, serif;
-$font-header: Inter, sans-serif;
-$font-mono: monospace;
+@import 'scss/theme.scss';
 
 body {
 	font-family: $font-body;

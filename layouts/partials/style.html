@@ -1,5 +1,5 @@
 {{ $options := (dict "outputStyle" "compressed")}}
 {{ $main := resources.Get "scss/main.scss" }}
 {{ $fonts := resources.Get "scss/fonts.scss" | resources.ExecuteAsTemplate "fonts-untemplate.scss" . }}
-{{ $style := slice $fonts $main | resources.Concat "styles.scss" | resources.ToCSS $options | resources.Fingerprint }}
+{{ $style := slice $fonts $main | resources.Concat "styles.scss" | resources.ToCSS | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">

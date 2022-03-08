@@ -1,6 +1,16 @@
-{{ $woff2 := resources.Get "fonts/ptserif_r.woff2" | resources.Fingerprint "md5" }}
+// {{ $styles := slice "r" "b" "i" "bi" }}
+// {{ $names := dict "r" "" "b" " Bold" "i" " Italic" "bi" " Bold Italic"}}
 
+// {{ range $styles }}
 @font-face {
 	font-family: 'PT Serif';
-	src: url('{{ $woff2.Permalink }}');
+	font-style: {{ cond (eq (strings.Count "i" .) 1) "italic" "regular" }};
+	font-weight: {{ cond (eq (strings.Count "b" .) 1) "700" "400" }};
+	font-display: swap;
+	// {{ $woff2 := resources.Get (printf "fonts/ptserif_%s.woff2" .) | resources.Fingerprint "md5" }}
+	// {{ $woff := resources.Get (printf "fonts/ptserif_%s.woff" .) | resources.Fingerprint "md5" }}
+	src: local('PT Serif{{ index $names . }}'),
+	     url('{{ $woff2.Permalink }}') format('woff2'),
+	     url('{{ $woff.Permalink }}') format('woff');
 }
+// {{ end }}
