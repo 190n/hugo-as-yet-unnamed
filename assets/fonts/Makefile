@@ -7,14 +7,16 @@
 
 STYLES = r b i bi
 FONTS  = $(addprefix ptserif_,$(STYLES))
-WOFF   = $(addsuffix .woff,$(FONTS))
-WOFF2  = $(addsuffix .woff2,$(FONTS))
+WOFF2  = $(addsuffix .woff2,$(FONTS)) inter_v.woff2
 
-all: $(WOFF) $(WOFF2)
+all: $(WOFF2)
 
 # download ZIP of all fonts
 ptserifweb.zip:
 	wget https://company.paratype.com/system/attachments/636/original/ptserifweb.zip
+
+Inter-3.19.zip:
+	wget https://github.com/rsms/inter/releases/download/v3.19/Inter-3.19.zip
 
 # subset the TTF files
 # pyftsubset can only output WOFF/WOFF2. other tools produce smaller files in those formats, so we
@@ -24,13 +26,11 @@ ptserifweb.zip:
 	woff2sfnt-zopfli $@.woff > $@
 
 # extract TTF files from the ZIP
-%.ttf: ptserifweb.zip
-	unzip ptserifweb.zip $@
+PTF%.ttf: ptserifweb.zip
+	unzip $< $@
 
-# compress TTF to WOFF
-%.woff: %.sub.ttf
-	sfnt2woff-zopfli $<
-	mv $(basename $<).woff $@
+Inter-roman.ttf: Inter-3.19.zip
+	unzip -j $< "Inter Variable/Single axis/$@"
 
 # compress TTF to WOFF2
 %.woff2: %.sub.ttf
@@ -50,12 +50,15 @@ ptserif_i.ttf: PTF56F_W.ttf
 ptserif_bi.ttf: PTF76F_W.ttf
 	mv $< $@
 
+inter_v.ttf: Inter-roman.ttf
+	mv $< $@
+
 # delete all output files that we don't need to distribute
 tidy:
-	rm -f ptserifweb.zip *.ttf *.ttf.woff
+	rm -f ptserifweb.zip Inter-3.19.zip *.ttf *.ttf.woff
 
 # delete all output files
 clean: tidy
-	rm -f $(WOFF) $(WOFF2)
+	rm -f $(WOFF2)
 
 .PHONY: all tidy clean
