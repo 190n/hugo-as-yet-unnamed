@@ -1,3 +1,25 @@
 $font-body: 'PT Serif', Georgia, serif;
-$font-header: Inter, sans-serif;
+$font-header: Inter, system-ui, sans-serif;
 $font-mono: monospace;
+
+$bg-light: #fff;
+$fg-light: red;
+$bg-dark: #222;
+$fg-dark: #fff;
+
+html.light, html {
+	--bg: #{$bg-light};
+	--fg: #{$fg-light};
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	html {
+		--bg: #{$bg-dark};
+		--fg: #{$fg-dark};
+	}
+}
+
+html.dark {
+	--bg: #{$bg-dark};
+	--fg: #{$fg-dark};
+}

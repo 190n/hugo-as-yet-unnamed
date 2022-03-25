@@ -7,11 +7,11 @@ body {
 	padding: 20px;
 	max-width: 720px;
 	text-align: left;
-	background-color: #88f;
+	background-color: var(--bg);
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	line-height: 1.5;
-	color: #444;
+	color: var(--fg);
 }
 
 h1,
@@ -22,7 +22,6 @@ h5,
 h6,
 strong,
 b {
-	color: #222;
 	font-family: Inter;
 	font-weight: 900;
 }
@@ -127,48 +126,4 @@ ul.blog-posts li span {
 
 ul.blog-posts li a:visited {
 	color: #8b6fcb;
-}
-
-@media (prefers-color-scheme: dark) {
-	body {
-		background-color: #008;
-		color: #ddd;
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	strong,
-	b {
-		color: #eee;
-	}
-
-	a {
-		color: #8cc2dd;
-	}
-
-	code {
-		background-color: #777;
-	}
-
-	pre code {
-		color: #ddd;
-	}
-
-	blockquote {
-		color: #ccc;
-	}
-
-	textarea,
-	input {
-		background-color: #252525;
-		color: #ddd;
-	}
-
-	.helptext {
-		color: #aaa;
-	}
 }
